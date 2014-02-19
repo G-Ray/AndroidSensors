@@ -7,6 +7,7 @@
     <string name="title_section3">Gravité</string>
     <string name="title_section4">Gyroscope</string>
     <string name="title_section5">Champ magnétique</string>
+    <string name="title_section6">Capteur de luminosité</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

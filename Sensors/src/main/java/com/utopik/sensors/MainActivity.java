@@ -75,6 +75,9 @@ public class MainActivity extends Activity
             case 5:
                 mTitle = getString(R.string.title_section5);
                 break;
+            case 6:
+                mTitle = getString(R.string.title_section6);
+                break;
         }
     }
 
@@ -166,6 +169,10 @@ public class MainActivity extends Activity
                         textView.append("Y: " + Float.toString(event.values[1]) + " uT\n");
                         textView.append("Z: " + Float.toString(event.values[2]) + " uT");
                         break;
+
+                    case Sensor.TYPE_LIGHT:
+                        textView.setText("Ambient light level: " + Float.toString(event.values[0]) + " lux");
+                        break;
                 }
             }
 
@@ -207,6 +214,12 @@ public class MainActivity extends Activity
 
                 case 5:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+                    mSensorManager.registerListener(listener, mSensor,
+                            SensorManager.SENSOR_DELAY_UI);
+                    break;
+
+                case 6:
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
                     mSensorManager.registerListener(listener, mSensor,
                             SensorManager.SENSOR_DELAY_UI);
                     break;
