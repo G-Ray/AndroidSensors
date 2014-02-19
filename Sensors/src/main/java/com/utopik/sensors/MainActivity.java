@@ -72,6 +72,9 @@ public class MainActivity extends Activity
             case 4:
                 mTitle = getString(R.string.title_section4);
                 break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
         }
     }
 
@@ -145,15 +148,24 @@ public class MainActivity extends Activity
                         textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
                         textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
                         break;
+
                     case Sensor.TYPE_GRAVITY:
                         textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
                         textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
                         textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
+                        break;
 
                     case Sensor.TYPE_GYROSCOPE:
                         textView.setText("X: " + Float.toString(event.values[0]) + " rad/s\n");
                         textView.append("Y: " + Float.toString(event.values[1]) + " rad/s\n");
                         textView.append("Z: " + Float.toString(event.values[2]) + " rad/s");
+                        break;
+
+                    case Sensor.TYPE_MAGNETIC_FIELD:
+                        textView.setText("X: " + Float.toString(event.values[0]) + " uT\n");
+                        textView.append("Y: " + Float.toString(event.values[1]) + " uT\n");
+                        textView.append("Z: " + Float.toString(event.values[2]) + " uT");
+                        break;
                 }
             }
 
@@ -174,18 +186,27 @@ public class MainActivity extends Activity
                     for (Sensor sensor : deviceSensors)
                         textView.append(sensor.getName() + "\n");
                     break;
+
                 case 2:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
                     mSensorManager.registerListener(listener, mSensor,
                             SensorManager.SENSOR_DELAY_UI);
                     break;
+
                 case 3:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
                     mSensorManager.registerListener(listener, mSensor,
                             SensorManager.SENSOR_DELAY_UI);
                     break;
+
                 case 4:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+                    mSensorManager.registerListener(listener, mSensor,
+                            SensorManager.SENSOR_DELAY_UI);
+                    break;
+
+                case 5:
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
                     mSensorManager.registerListener(listener, mSensor,
                             SensorManager.SENSOR_DELAY_UI);
                     break;
