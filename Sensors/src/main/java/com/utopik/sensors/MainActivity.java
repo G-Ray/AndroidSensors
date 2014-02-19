@@ -7,6 +7,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -117,6 +119,7 @@ public class MainActivity extends Activity
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         private SensorManager mSensorManager;
+        private Sensor mSensor;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -133,13 +136,25 @@ public class MainActivity extends Activity
         public PlaceholderFragment() {
         }
 
+        private SensorEventListener listener = new SensorEventListener() {
+            public void onSensorChanged(SensorEvent event){
+                TextView textView = (TextView) getActivity().findViewById(R.id.section_label);
+                if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
+                    textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
+                    textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
+                    textView.append("Z: " + Float.toString(event.values[2]) + " m/s\n");
+                }
+            }
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            }
+        };
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
@@ -148,7 +163,9 @@ public class MainActivity extends Activity
                         textView.append(sensor.getName() + "\n");
                     break;
                 case 2:
-                    textView.setText("");
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+                    mSensorManager.registerListener(listener, mSensor,
+                                                    SensorManager.SENSOR_DELAY_UI);
                     break;
                 case 3:
                     textView.setText("");
@@ -158,6 +175,11 @@ public class MainActivity extends Activity
                     break;
             }
             return rootView;
+        }
+        @Override
+        public void onDetach() {
+            super.onDetach();
+            mSensorManager.unregisterListener(listener);
         }
 
         @Override
