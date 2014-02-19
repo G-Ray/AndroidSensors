@@ -219,49 +219,49 @@ public class MainActivity extends Activity
                 case 2:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 3:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 4:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 5:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 6:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 7:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 8:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
 
                 case 9:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
                     mSensorManager.registerListener(listener, mSensor,
-                            SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_NORMAL);
                     break;
             }
             return rootView;
