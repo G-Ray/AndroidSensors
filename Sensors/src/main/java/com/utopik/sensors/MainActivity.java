@@ -139,17 +139,24 @@ public class MainActivity extends Activity
         private SensorEventListener listener = new SensorEventListener() {
             public void onSensorChanged(SensorEvent event){
                 TextView textView = (TextView) getActivity().findViewById(R.id.section_label);
-                if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
-                    textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
-                    textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
-                    textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
-                }
-                if (event.sensor.getType()==Sensor.TYPE_GRAVITY) {
-                    textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
-                    textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
-                    textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
+                switch (event.sensor.getType()) {
+                    case Sensor.TYPE_ACCELEROMETER:
+                        textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
+                        textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
+                        textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
+                        break;
+                    case Sensor.TYPE_GRAVITY:
+                        textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
+                        textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
+                        textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
+
+                    case Sensor.TYPE_GYROSCOPE:
+                        textView.setText("X: " + Float.toString(event.values[0]) + " rad/s\n");
+                        textView.append("Y: " + Float.toString(event.values[1]) + " rad/s\n");
+                        textView.append("Z: " + Float.toString(event.values[2]) + " rad/s");
                 }
             }
+
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
             }
         };
@@ -178,7 +185,9 @@ public class MainActivity extends Activity
                             SensorManager.SENSOR_DELAY_UI);
                     break;
                 case 4:
-                    textView.setText("");
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+                    mSensorManager.registerListener(listener, mSensor,
+                            SensorManager.SENSOR_DELAY_UI);
                     break;
             }
             return rootView;
