@@ -81,6 +81,9 @@ public class MainActivity extends Activity
             case 7:
                 mTitle = getString(R.string.title_section7);
                 break;
+            case 8:
+                mTitle = getString(R.string.title_section8);
+                break;
         }
     }
 
@@ -174,11 +177,17 @@ public class MainActivity extends Activity
                         break;
 
                     case Sensor.TYPE_LIGHT:
-                        textView.setText("Ambient light level: " + Float.toString(event.values[0]) + " lux");
+                        textView.setText("Ambient light level: " + Float.toString(event.values[0])
+                                + " lux");
                         break;
 
                     case Sensor.TYPE_PROXIMITY:
                         textView.setText("Distance: " + Float.toString(event.values[0]) + " cm");
+                        break;
+
+                    case Sensor.TYPE_PRESSURE:
+                        textView.setText("Pression atmoshpérique: " +
+                                Float.toString(event.values[0]) + " hPa");
                         break;
                 }
             }
@@ -233,6 +242,12 @@ public class MainActivity extends Activity
 
                 case 7:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+                    mSensorManager.registerListener(listener, mSensor,
+                            SensorManager.SENSOR_DELAY_UI);
+                    break;
+
+                case 8:
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
                     mSensorManager.registerListener(listener, mSensor,
                             SensorManager.SENSOR_DELAY_UI);
                     break;
