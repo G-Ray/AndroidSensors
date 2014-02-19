@@ -10,6 +10,7 @@
     <string name="title_section6">Capteur de luminosité</string>
     <string name="title_section7">Capteur de proximité</string>
     <string name="title_section8">Capteur de pression atm.</string>
+    <string name="title_section9">Accélération</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

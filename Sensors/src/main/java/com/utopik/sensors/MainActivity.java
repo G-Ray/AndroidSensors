@@ -189,6 +189,12 @@ public class MainActivity extends Activity
                         textView.setText("Pression atmoshpérique: " +
                                 Float.toString(event.values[0]) + " hPa");
                         break;
+
+                    case Sensor.TYPE_LINEAR_ACCELERATION:
+                        textView.setText("X: " + Float.toString(event.values[0]) + " m/s²\n");
+                        textView.append("Y: " + Float.toString(event.values[1]) + " m/s²\n");
+                        textView.append("Z: " + Float.toString(event.values[2]) + " m/s²");
+                        break;
                 }
             }
 
@@ -248,6 +254,12 @@ public class MainActivity extends Activity
 
                 case 8:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+                    mSensorManager.registerListener(listener, mSensor,
+                            SensorManager.SENSOR_DELAY_UI);
+                    break;
+
+                case 9:
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
                     mSensorManager.registerListener(listener, mSensor,
                             SensorManager.SENSOR_DELAY_UI);
                     break;
