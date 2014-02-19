@@ -142,7 +142,12 @@ public class MainActivity extends Activity
                 if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER) {
                     textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
                     textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
-                    textView.append("Z: " + Float.toString(event.values[2]) + " m/s\n");
+                    textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
+                }
+                if (event.sensor.getType()==Sensor.TYPE_GRAVITY) {
+                    textView.setText("X: " + Float.toString(event.values[0]) + " m/s\n");
+                    textView.append("Y: " + Float.toString(event.values[1]) + " m/s\n");
+                    textView.append("Z: " + Float.toString(event.values[2]) + " m/s");
                 }
             }
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -165,10 +170,12 @@ public class MainActivity extends Activity
                 case 2:
                     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
                     mSensorManager.registerListener(listener, mSensor,
-                                                    SensorManager.SENSOR_DELAY_UI);
+                            SensorManager.SENSOR_DELAY_UI);
                     break;
                 case 3:
-                    textView.setText("");
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+                    mSensorManager.registerListener(listener, mSensor,
+                            SensorManager.SENSOR_DELAY_UI);
                     break;
                 case 4:
                     textView.setText("");
